@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "harpysmp",
+  "version": "${version}",
+  "name": "HarpySMP",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "LGPL-3.0",
+  "icon": "assets/harpysmp/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "fabric-datagen": [
+      "org.agmas.harpysmp.client.HarpysmpDataGenerator"
+    ],
+    "client": [
+      "org.agmas.harpysmp.client.HarpysmpClient"
+    ],
+    "cardinal-components": [
+      "org.agmas.harpysmp.components.HarpySMPComponents"
+    ],
+    "main": [
+      "org.agmas.harpysmp.Harpysmp"
+    ]
+  },
+
+  "custom": {
+    "cardinal-components": [
+      "harpysmp:lives",
+      "harpysmp:deathban"
+    ]
+  },
+  "mixins": [
+    "harpysmp.mixins.json",
+    {
+      "config": "harpysmp.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric-api": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
