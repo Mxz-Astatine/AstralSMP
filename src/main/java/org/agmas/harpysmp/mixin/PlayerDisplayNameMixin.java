@@ -29,7 +29,7 @@ public abstract class PlayerDisplayNameMixin {
             name = name.copy().fillStyle(Style.EMPTY.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.of(getGameProfile().getName()))));
         }
         if (((PlayerEntity)(Object)this).getGameProfile().getId().equals(UUID.fromString(Harpysmp.ASFERIA_UUID))) {
-            cir.setReturnValue(name.copy().formatted(Formatting.OBFUSCATED).withColor(new Color(168,33,206).getRGB()));
+            cir.setReturnValue(name.copy().withColor(new Color(168,33,206).getRGB()));
             cir.cancel();
             return;
         }
@@ -45,7 +45,7 @@ public abstract class PlayerDisplayNameMixin {
             name = name.copy().fillStyle(Style.EMPTY.withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,  Text.of(getGameProfile().getName()))));
         }
         if (((PlayerEntity)(Object)this).getGameProfile().getId().equals(UUID.fromString(Harpysmp.ASFERIA_UUID))) {
-            cir.setReturnValue(name.copy().formatted(Formatting.OBFUSCATED).withColor(new Color(168,33,206).getRGB()));
+            cir.setReturnValue(name.copy().withColor(new Color(168,33,206).getRGB()));
             cir.cancel();
             return;
         }

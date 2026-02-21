@@ -24,7 +24,7 @@ import java.util.UUID;
 public class HarpyLivesComponent implements AutoSyncedComponent, ServerTickingComponent {
     public static final ComponentKey<HarpyLivesComponent> KEY = ComponentRegistry.getOrCreate(Identifier.of(Harpysmp.MOD_ID, "lives"), HarpyLivesComponent.class);
     private final PlayerEntity player;
-    public long graceTime = Date.from(Instant.now().plus(7, ChronoUnit.DAYS)).getTime();
+    public long graceTime = Date.from(Instant.now().plus(2, ChronoUnit.DAYS)).getTime();
     public int lives = 4;
     public String nickname = null;
     public boolean invisible = false;

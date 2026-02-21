@@ -52,26 +52,26 @@ public class Harpysmp implements ModInitializer {
                 DeathbanWorldComponent.KEY.get(commandContext.getSource().getServer().getOverworld()).enabled = !DeathbanWorldComponent.KEY.get(commandContext.getSource().getServer().getOverworld()).enabled;
                 return 1;
             }));
-            dispatcher.register(CommandManager.literal("toggleFlight").requires(serverCommandSource -> serverCommandSource.getPlayer().getUuid().equals(UUID.fromString(ASFERIA_UUID))).executes((commandContext)->{
-                commandContext.getSource().getPlayer().getAbilities().allowFlying = !commandContext.getSource().getPlayer().getAbilities().allowFlying;
-                commandContext.getSource().getPlayer().sendAbilitiesUpdate();
-                return 1;
-            }));
+//            dispatcher.register(CommandManager.literal("toggleFlight").requires(serverCommandSource -> serverCommandSource.getPlayer().getUuid().equals(UUID.fromString(ASFERIA_UUID))).executes((commandContext)->{
+//                commandContext.getSource().getPlayer().getAbilities().allowFlying = !commandContext.getSource().getPlayer().getAbilities().allowFlying;
+//                commandContext.getSource().getPlayer().sendAbilitiesUpdate();
+//                return 1;
+//            }));
             dispatcher.register(CommandManager.literal("toggleInvis").requires(serverCommandSource -> serverCommandSource.getPlayer().getUuid().equals(UUID.fromString(ASFERIA_UUID))).executes((commandContext)->{
                 HarpyLivesComponent.KEY.get(commandContext.getSource().getPlayer()).invisible = !HarpyLivesComponent.KEY.get(commandContext.getSource().getPlayer()).invisible;
                 commandContext.getSource().getPlayer().sendMessage(Text.of(HarpyLivesComponent.KEY.get(commandContext.getSource().getPlayer()).invisible+""),true);
                 return 1;
             }));
-            dispatcher.register(CommandManager.literal("setNickname").then(CommandManager.argument("name", StringArgumentType.string()).executes((commandContext)->{
-                String name = StringArgumentType.getString(commandContext, "name");
-                if (name.length() > 16) name = name.substring(0,16);
-                HarpyLivesComponent.KEY.get(commandContext.getSource().getPlayer()).nickname = name;
-                HarpyLivesComponent.KEY.get(commandContext.getSource().getPlayer()).sync();
-                for (ServerPlayerEntity player : commandContext.getSource().getPlayer().getServer().getPlayerManager().getPlayerList()) {
-                    player.networkHandler.sendPacket(new PlayerListS2CPacket(PlayerListS2CPacket.Action.UPDATE_DISPLAY_NAME, (ServerPlayerEntity) commandContext.getSource().getPlayer()));
-                }
-                return 1;
-            })));
+//            dispatcher.register(CommandManager.literal("setNickname").then(CommandManager.argument("name", StringArgumentType.string()).executes((commandContext)->{
+//                String name = StringArgumentType.getString(commandContext, "name");
+//                if (name.length() > 16) name = name.substring(0,16);
+//                HarpyLivesComponent.KEY.get(commandContext.getSource().getPlayer()).nickname = name;
+//                HarpyLivesComponent.KEY.get(commandContext.getSource().getPlayer()).sync();
+//                for (ServerPlayerEntity player : commandContext.getSource().getPlayer().getServer().getPlayerManager().getPlayerList()) {
+//                    player.networkHandler.sendPacket(new PlayerListS2CPacket(PlayerListS2CPacket.Action.UPDATE_DISPLAY_NAME, (ServerPlayerEntity) commandContext.getSource().getPlayer()));
+//                }
+//                return 1;
+//            })));
         });
 
 
@@ -81,6 +81,7 @@ public class Harpysmp implements ModInitializer {
             if (serverPlayerEntity.getAttacker() instanceof PlayerEntity killer && HarpyLivesComponent.KEY.get(serverPlayerEntity).lives > 0) {
                 if (HoloPlayerComponent.KEY.get(serverPlayerEntity).inHoloMode) return;
                 if (serverPlayerEntity instanceof FakestPlayer) return;
+                if (serverPlayerEntity == killer) return;
                 if (killer.getUuid().equals(UUID.fromString(ASFERIA_UUID))) return;
                 if (HarpyLivesComponent.KEY.get(serverPlayerEntity).graceTime > Date.from(Instant.now()).getTime()) {
 
